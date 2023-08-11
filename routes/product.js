@@ -4,9 +4,27 @@ const router = express.Router();
 
 // This route is used to get all the products
 router.get('/products/all', async (req, res) => {
+	const page = parseInt(req.query.page) || 1;
+	const limit = parseInt(req.query.limit) || 12;
+	const offset = (page - 1) * limit;
+
 	try {
-		const products = await Product.findAll({ include: Category });
-		return res.json(products);
+		const { count, rows } = await Product.findAndCountAll({
+			offset,
+			limit,
+			order: [['createdAt']],
+		});
+
+		// Calculate the total number of pages
+		const totalPages = Math.ceil(count / limit);
+
+		return res.json({
+			page,
+			totalPages,
+			limit,
+			totalProduct: count,
+			products: rows,
+		});
 	} catch (error) {
 		console.log('Could not find products!', error.message);
 		return res.status(404).json({ error: 'Could not find products' });
