@@ -16,6 +16,7 @@ router.post('/categories/create', async (req, res) => {
 		console.log(error);
 	}
 });
+
 //Get category by ID
 router.get('/categories/category/:uuid', async (req, res) => {
 	const uuid = req.params.uuid;
