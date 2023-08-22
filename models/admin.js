@@ -1,13 +1,9 @@
 'use strict';
 const { Model } = require('sequelize');
-// Roles enum
-const ROLES = {
-	ADMIN: 'admin',
-	MODERATOR: 'moderator',
-};
+const ROLES = require('../utils/roles');
 
 module.exports = (sequelize, DataTypes) => {
-	class admin extends Model {
+	class ADMIN extends Model {
 		/**
 		 * Helper method for defining associations.
 		 * This method is not a part of Sequelize lifecycle.
@@ -17,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 			// define association here
 		}
 	}
-	admin.init(
+	ADMIN.init(
 		{
 			uuid: {
 				type: DataTypes.UUID,
@@ -50,5 +46,5 @@ module.exports = (sequelize, DataTypes) => {
 			modelName: 'Admin',
 		}
 	);
-	return admin;
+	return ADMIN;
 };
