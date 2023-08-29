@@ -62,6 +62,11 @@ router.post('/admins/create', async (req, res) => {
 	}
 });
 
+// Admin Login Route
+router.post('/admins/login', (req, res, next) => {
+	passport.authenticate('local', (err, admin, info));
+});
+
 // get all admins
 // Protected route only admins can have this access
 router.get('/admins/all', async (req, res) => {

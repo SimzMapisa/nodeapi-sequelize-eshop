@@ -2,11 +2,16 @@ const express = require('express');
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
 const userRoutes = require('./routes/auth');
-const { sequelize } = require('./models');
 const app = express();
-require('dotenv').config();
 
+if (process.env.ENVIRONMENT !== 'production') {
+	require('dotenv').config();
+}
+
+// Middleware
 app.use(express.json());
+
+//Routes
 app.use('/api/v1', productRoutes);
 app.use('/api/v1', categoryRoutes);
 app.use('/api/v1', userRoutes);
