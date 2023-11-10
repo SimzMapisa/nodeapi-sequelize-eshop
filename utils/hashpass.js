@@ -22,5 +22,3 @@ const comparePasswords = (password, dbPassword) => {
 };
 
 module.exports = { hashPassword, comparePasswords };
-
-// hashPassword('Simbarashe');
