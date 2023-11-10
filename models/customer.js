@@ -1,5 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
+const { ROLES } = require('../utils/roles');
 module.exports = (sequelize, DataTypes) => {
 	class Customer extends Model {
 		/**
@@ -32,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
 			physicalAddress: {
 				type: DataTypes.STRING,
 				allowNull: false,
+			},
+			role: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				defaultValue: ROLES.CUSTOMER,
+				validate: {
+					isIn: [Object.values(ROLES)],
+				},
 			},
 		},
 		{
