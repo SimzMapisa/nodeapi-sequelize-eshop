@@ -2,6 +2,7 @@ const express = require('express');
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
 const userRoutes = require('./routes/auth');
+const { sequelize } = require('./models');
 const app = express();
 
 if (process.env.ENVIRONMENT !== 'production') {
@@ -16,7 +17,7 @@ app.use('/api/v1', productRoutes);
 app.use('/api/v1', categoryRoutes);
 app.use('/api/v1', userRoutes);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
 	// sequelize.sync({ alter: true });
 	// sequelize.sync({ force: true });
