@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const ROLES = require('../utils/roles');
+const { ROLES } = require('../utils/roles');
 
 module.exports = (sequelize, DataTypes) => {
 	class ADMIN extends Model {
