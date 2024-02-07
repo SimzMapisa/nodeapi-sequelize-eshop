@@ -1,7 +1,7 @@
 {
 	"development": {
 		"username": "root",
-		"password": "atOncemedia2023!",
+		"password": "",
 		"database": "eshop",
 		"host": "127.0.0.1",
 		"dialect": "mysql"

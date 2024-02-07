@@ -2,7 +2,9 @@ const express = require('express');
 const { Admin, Customer } = require('../models');
 const { ROLES } = require('../utils/roles');
 const { hashPassword } = require('../utils/hashpass');
+const passport = require('passport');
 const router = express.Router();
+require('../config/passport');
 
 // ****************************  ROUTES *********************************
 /**
@@ -72,8 +74,7 @@ router.post('/admins/create', async (req, res) => {
 	}
 });
 
-// here we will create the customer ceate account route
-
+// Here we will create the customer ceate account route
 router.post('/customer', async (req, res) => {
 	const { name, email, physicalAddress, password, role } = req.body;
 
@@ -98,17 +99,10 @@ router.post('/customer', async (req, res) => {
 });
 
 // Admin Login Route
-router.post('/admins/login', (req, res, next) => {
-	// create the login logic here
-	passport.authenticate('local', (err, user, info) => {
-		if (err) throw err;
-		if (!user) res.send('No user exists');
-		req.logIn(user, (err) => {
-			if (err) throw err;
-			res.send('Successfully Authenticated');
-			console.log(req.user);
-		});
-	});
+router.post('/login', passport.authenticate('local'));
+
+router.get('/dashboard', (req, res) => {
+	res.send('Welcome to the dashboard');
 });
 
 /**
